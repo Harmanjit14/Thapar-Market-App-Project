@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "26825306185",
+    "firebase_url": "https://thapar-market.firebaseio.com",
+    "project_id": "thapar-market",
+    "storage_bucket": "thapar-market.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:26825306185:android:a00c9cd451646742048f98",
+        "android_client_info": {
+          "package_name": "com.hsingh8_be19.TMart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "26825306185-kdtu2kj8ugtk7epg0s1epde2tctq8tqn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgYpTwg21H_pv4sUl2o-2NqWwgE2B1ALs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "26825306185-kdtu2kj8ugtk7epg0s1epde2tctq8tqn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
