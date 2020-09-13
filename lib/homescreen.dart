@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> with ColorFile {
                 color: charcoal,
                 child: Container(
                   child: Column(children: [
-                    Expanded(flex: 5, child: allButtons(context)),
+                    Expanded(flex: 5, child: BottomContainer()),
                     Expanded(
                       child: Container(
                           margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -90,48 +90,84 @@ class _HomeScreenState extends State<HomeScreen> with ColorFile {
   }
 }
 
-Widget loginButtton() {}
+class BottomContainer extends StatefulWidget {
+  @override
+  _BottomContainerState createState() => _BottomContainerState();
+}
 
-Widget regisButton() {}
+class _BottomContainerState extends State<BottomContainer> with ColorFile{
+  int i = 0;
 
-Widget allButtons(BuildContext context) {
-  ColorFile obj = new ColorFile();
-  return Container(
-    margin: EdgeInsets.all(20),
-    child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Container(
-        height: MediaQuery.of(context).size.height * 0.08,
-        width: MediaQuery.of(context).size.width * 0.5,
-        child: RaisedButton(
-          child: Text(
-            'Login',
-            style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+  Widget loginButtton(BuildContext context) {
+    return Container(child: Text('Login'));
+  }
+
+  Widget regisButton(BuildContext context) {
+    return Container(child: Text('register'));
+  }
+
+  Widget allButtons(BuildContext context) {
+    ColorFile obj = new ColorFile();
+    return Container(
+      margin: EdgeInsets.all(20),
+      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Container(
+          height: MediaQuery.of(context).size.height * 0.08,
+          width: MediaQuery.of(context).size.width * 0.5,
+          child: RaisedButton(
+            child: Text(
+              'Login',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
+            ),
+            padding: EdgeInsets.all(0),
+            onPressed: () {
+              setState(() {
+                i = 1;
+              });
+            },
+            elevation: 7,
+            color: burntRed,
           ),
-          padding: EdgeInsets.all(0),
-          onPressed: () {},
-          elevation: 7,
-          color: obj.burntRed,
         ),
-      ),
-      SizedBox(
-        height: 15,
-      ),
-      Container(
-        height: MediaQuery.of(context).size.height * 0.08,
-        width: MediaQuery.of(context).size.width * 0.5,
-        child: RaisedButton(
-          child: Text(
-            'Register',
-            style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+        SizedBox(
+          height: 15,
+        ),
+        Container(
+          height: MediaQuery.of(context).size.height * 0.08,
+          width: MediaQuery.of(context).size.width * 0.5,
+          child: RaisedButton(
+            child: Text(
+              'Register',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
+            ),
+            padding: EdgeInsets.all(0),
+            onPressed: () {
+              setState(() {
+                i = 2;
+              });
+            },
+            elevation: 7,
+            color: burntRed,
           ),
-          padding: EdgeInsets.all(0),
-          onPressed: () {},
-          elevation: 7,
-          color: obj.burntRed,
         ),
-      ),
-    ]),
-  );
+      ]),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (i == 0) {
+      return allButtons(context);
+    } else if (i == 1) {
+      return loginButtton(context);
+    } else if (i == 2) {
+      return regisButton(context);
+    }
+  }
 }
