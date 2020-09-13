@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:cool_alert/cool_alert.dart';
 import 'package:TMart/colorFile.dart';
 import 'package:TMart/firebaseDatabase.dart';
 import 'package:animate_do/animate_do.dart';
@@ -103,13 +103,13 @@ class BottomContainer extends StatefulWidget {
   _BottomContainerState createState() => _BottomContainerState();
 }
 
-class _BottomContainerState extends State<BottomContainer> with ColorFile,FirebaseDatabase {
+class _BottomContainerState extends State<BottomContainer>
+    with ColorFile, FirebaseDatabase {
   int i = 0;
   final RoundedLoadingButtonController _btnController =
       new RoundedLoadingButtonController();
-
-       void _doSomethingRegister() async {
-         var temp = await registerUser();
+  void _doSomethingRegister() async {
+    var temp = await registerUser();
     if (temp == null) {
       _btnController.success();
       Timer(Duration(seconds: 2), () {
@@ -118,6 +118,13 @@ class _BottomContainerState extends State<BottomContainer> with ColorFile,Fireba
     } else {
       Timer(Duration(seconds: 2), () {
         _btnController.error();
+        CoolAlert.show(
+          context: context,
+          type: CoolAlertType.error,
+          title: "Oops...",
+          text: "Email or Password not correct",
+          confirmBtnColor: burntRed
+        );
       });
       print('LOGIN FAILED');
       print(temp);
@@ -126,9 +133,9 @@ class _BottomContainerState extends State<BottomContainer> with ColorFile,Fireba
       });
     }
   }
+
   void _doSomethingLogin() async {
-    
-var temp = await loginUser();
+    var temp = await loginUser();
     if (temp == null) {
       _btnController.success();
       Timer(Duration(seconds: 2), () {
@@ -137,6 +144,13 @@ var temp = await loginUser();
     } else {
       Timer(Duration(seconds: 2), () {
         _btnController.error();
+        CoolAlert.show(
+          context: context,
+          type: CoolAlertType.error,
+          title: "Oops...",
+          text: "Email or Password not correct",
+          confirmBtnColor: burntRed
+        );
       });
       print('REGISTRATION FAILED');
       print(temp);
@@ -253,8 +267,7 @@ var temp = await loginUser();
                             letterSpacing: 2),
                       ),
                       controller: _btnController,
-                      onPressed: _doSomethingLogin
-                      ),
+                      onPressed: _doSomethingLogin),
                 ),
               ),
             ),
@@ -369,8 +382,7 @@ var temp = await loginUser();
                             letterSpacing: 2),
                       ),
                       controller: _btnController,
-                      onPressed: _doSomethingRegister
-                      ),
+                      onPressed: _doSomethingRegister),
                 ),
               ),
             ),
@@ -442,3 +454,4 @@ var temp = await loginUser();
     }
   }
 }
+
