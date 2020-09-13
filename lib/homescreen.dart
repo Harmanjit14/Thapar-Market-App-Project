@@ -61,7 +61,18 @@ class _HomeScreenState extends State<HomeScreen> with ColorFile {
                 color: charcoal,
                 child: Container(
                   child: Column(children: [
-                    allButtons(context),
+                    Expanded(flex: 5, child: allButtons(context)),
+                    Expanded(
+                      child: Container(
+                          margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                          alignment: Alignment.bottomCenter,
+                          child: Text(
+                            'Made with ❤ by Harmanjit14',
+                            style: TextStyle(
+                              letterSpacing: 1.3,
+                            ),
+                          )),
+                    ),
                   ]),
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
@@ -87,9 +98,9 @@ Widget allButtons(BuildContext context) {
   ColorFile obj = new ColorFile();
   return Container(
     margin: EdgeInsets.all(20),
-    child: Column(children: [
+    child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Container(
-        height: 60,
+        height: MediaQuery.of(context).size.height * 0.08,
         width: MediaQuery.of(context).size.width * 0.5,
         child: RaisedButton(
           child: Text(
@@ -107,7 +118,7 @@ Widget allButtons(BuildContext context) {
         height: 15,
       ),
       Container(
-        height: 60,
+        height: MediaQuery.of(context).size.height * 0.08,
         width: MediaQuery.of(context).size.width * 0.5,
         child: RaisedButton(
           child: Text(
