@@ -19,6 +19,15 @@ class _HomeScreenState extends State<HomeScreen> with ColorFile {
             Expanded(
               flex: 1,
               child: Container(
+                width: MediaQuery.of(context).size.width,
+                child: Container(
+                  padding: EdgeInsets.all(20),
+                  child: Column(children: [
+                    Container(
+                      child: Text('Thapar Market'),
+                    ),
+                  ]),
+                ),
                 decoration: BoxDecoration(
                     borderRadius:
                         BorderRadius.only(bottomRight: Radius.circular(70)),
@@ -28,8 +37,10 @@ class _HomeScreenState extends State<HomeScreen> with ColorFile {
             Expanded(
               flex: 1,
               child: Container(
+                width: MediaQuery.of(context).size.width,
                 color: charcoal,
                 child: Container(
+                  width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius:
