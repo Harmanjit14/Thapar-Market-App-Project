@@ -128,7 +128,7 @@ class _BottomContainerState extends State<BottomContainer> with ColorFile,Fireba
   }
   void _doSomethingLogin() async {
     
-var temp = await registerUser();
+var temp = await loginUser();
     if (temp == null) {
       _btnController.success();
       Timer(Duration(seconds: 2), () {
