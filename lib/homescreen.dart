@@ -1,4 +1,5 @@
 import 'package:TMart/colorFile.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,81 +12,84 @@ class _HomeScreenState extends State<HomeScreen> with ColorFile {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Container(
+          child: SingleChildScrollView(
+                      child: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Column(
-          children: [
-            Expanded(
-              flex: 1,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
+            children: [
+              Expanded(
+                flex: 1,
                 child: Container(
-                  padding: EdgeInsets.all(20),
-                  child: Column(children: [
-                    Expanded(
-                      flex: 4,
-                      child: Container(child: Image.asset('lib/assets/1.png')),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: [
-                          Container(
-                            child: Text(
-                              'Thapar Market',
-                              style: TextStyle(
-                                  color: orangeYellow,
-                                  fontSize: 37,
-                                  fontFamily: 'Maven',
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1.3),
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                        ],
-                      ),
-                    ),
-                  ]),
-                ),
-                decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.only(bottomRight: Radius.circular(70)),
-                    color: charcoal),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                color: charcoal,
-                child: Container(
-                  child: Column(children: [
-                    Expanded(flex: 5, child: BottomContainer()),
-                    Expanded(
-                      child: Container(
-                          margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                          alignment: Alignment.bottomCenter,
-                          child: Text(
-                            'Made with ❤ by Harmanjit14',
-                            style: TextStyle(
-                              letterSpacing: 1.3,
-                            ),
-                          )),
-                    ),
-                  ]),
                   width: MediaQuery.of(context).size.width,
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    child: Column(children: [
+                      Expanded(
+                        flex: 4,
+                        child:
+                            Container(child: Image.asset('lib/assets/1.png')),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          children: [
+                            Container(
+                              child: Text(
+                                'Thapar Market',
+                                style: TextStyle(
+                                    color: orangeYellow,
+                                    fontSize: 37,
+                                    fontFamily: 'Maven',
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1.3),
+                              ),
+                            ),
+                            SizedBox(height: 5),
+                          ],
+                        ),
+                      ),
+                    ]),
+                  ),
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius:
-                        BorderRadius.only(topLeft: Radius.circular(70)),
+                      borderRadius:
+                          BorderRadius.only(bottomRight: Radius.circular(70)),
+                      color: charcoal),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  color: charcoal,
+                  child: Container(
+                    child: Column(children: [
+                      Expanded(flex: 5, child: BottomContainer()),
+                      Expanded(
+                        child: Container(
+                            margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                            alignment: Alignment.topCenter,
+                            child: Text(
+                              'Made with ❤ by Harmanjit14',
+                              style: TextStyle(
+                                letterSpacing: 1.3,
+                              ),
+                            )),
+                      ),
+                    ]),
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius:
+                          BorderRadius.only(topLeft: Radius.circular(70)),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
         ),
-      )),
+      ),
+          )),
     );
   }
 }
@@ -95,11 +99,78 @@ class BottomContainer extends StatefulWidget {
   _BottomContainerState createState() => _BottomContainerState();
 }
 
-class _BottomContainerState extends State<BottomContainer> with ColorFile{
+class _BottomContainerState extends State<BottomContainer> with ColorFile {
   int i = 0;
 
   Widget loginButtton(BuildContext context) {
-    return Container(child: Text('Login'));
+    return Container(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+    height: 40,
+    width: MediaQuery.of(context).size.width * 0.8,
+    child: ElasticInLeft(
+      child: TextField(
+        onChanged: (value) {},
+        style: TextStyle(
+          fontSize: 12,
+        ),
+        keyboardType: TextInputType.emailAddress,
+        maxLines: 1,
+        textAlign: TextAlign.center,
+        autocorrect: false,
+        decoration: InputDecoration(
+          labelText: 'Email',
+          border:
+              OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+          prefixIcon: Icon(
+            Icons.arrow_right,
+            color: sandyBrown,
+            size: 30,
+          ),
+          suffixIcon: Icon(
+            Icons.arrow_left,
+            color: sandyBrown,
+            size: 30,
+          ),
+        ),
+      ),
+    ),
+        ),
+        SizedBox(height: 15),
+        Container(
+    height: 40,
+    width: MediaQuery.of(context).size.width * 0.8,
+    child: ElasticInRight(
+      child: TextField(
+        onChanged: (value) {},
+        style: TextStyle(
+          fontSize: 12,
+        ),
+        keyboardType: TextInputType.emailAddress,
+        maxLines: 1,
+        textAlign: TextAlign.center,
+        autocorrect: false,
+        decoration: InputDecoration(
+          labelText: 'Email',
+          border:
+              OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+          prefixIcon: Icon(
+            Icons.arrow_right,
+            color: sandyBrown,
+            size: 30,
+          ),
+          suffixIcon: Icon(
+            Icons.arrow_left,
+            color: sandyBrown,
+            size: 30,
+          ),
+        ),
+      ),
+    ),
+        ),
+      ]));
   }
 
   Widget regisButton(BuildContext context) {
@@ -107,7 +178,6 @@ class _BottomContainerState extends State<BottomContainer> with ColorFile{
   }
 
   Widget allButtons(BuildContext context) {
-    ColorFile obj = new ColorFile();
     return Container(
       margin: EdgeInsets.all(20),
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
