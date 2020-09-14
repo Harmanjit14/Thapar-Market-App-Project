@@ -87,7 +87,7 @@ class _SideNavBarState extends State<SideNavBar>
               color: charcoal,
             )),
             Align(
-              alignment: Alignment(0, -0.8),
+              alignment: Alignment(0, -0.7),
               child: GestureDetector(
                 onTap: () {
                   onIconPressed();
@@ -127,7 +127,7 @@ class CustomMenuClipper extends CustomClipper<Path> {
     path.quadraticBezierTo(0, 8, 10, 16);
     path.quadraticBezierTo(width - 1, height / 2 - 20, width, height / 2);
     path.quadraticBezierTo(width + 1, height / 2 + 20, 10, height - 16);
-    path.quadraticBezierTo(0, height-8, 0, height);
+    path.quadraticBezierTo(0, height - 8, 0, height);
     path.close();
     return path;
   }
@@ -149,6 +149,72 @@ class _MainBodyState extends State<MainBody> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
+      child: Layout1(),
+    );
+  }
+}
+
+class Layout1 extends StatefulWidget {
+  @override
+  _Layout1State createState() => _Layout1State();
+}
+
+class _Layout1State extends State<Layout1> with ColorFile {
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      children: [
+        Container(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: TextField(
+              decoration: InputDecoration(
+                suffixIcon: Icon(
+                  Icons.arrow_left,
+                  size: 30,
+                ),
+                hintText: 'Search Here...',
+                prefixIcon: Icon(
+                  Icons.arrow_right,
+                  size: 30,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+          ),
+        ),
+        Container(
+          child: Column(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * 0.2,
+                margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 5,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        child:
+                            Container(color: burntRed, child: Text('$index')),
+                      );
+                    }),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 10, 0, 5),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [],
+          ),
+        ),
+      ],
     );
   }
 }
