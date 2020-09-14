@@ -1,32 +1,32 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseDatabase {
-  String username;
+  String name;
   String password;
-  String userId;
   String email;
-  String message;
-  String tempPhone;
+  String hostel = "none";
+  String phone;
   String tempString;
-  void setName(String uname) {
-    username = uname;
-  }
 
-  void setEmail(String uname) {
-    email = uname;
-  }
-
-  void setUserId(String uname) {
-    userId = uname;
-  }
-
-  void setPass(String uname) {
-    password = uname;
-  }
-
-  void conPrint() {
-    print(email);
-    print(password);
+  Future sendUserData() async {
+    final obj = FirebaseFirestore.instance;
+    try {
+      if (name == null || phone == null || email == null || password == null) {
+        throw "error";
+      } else {
+        obj.collection('users').add({
+          'name': name,
+          'phone': phone,
+          'hostel': hostel,
+          'email': email,
+          'password': password
+        });
+      }
+    } catch (e) {
+      return e;
+    }
   }
 
   Future registerUser() async {

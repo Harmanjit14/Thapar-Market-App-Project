@@ -36,6 +36,7 @@ dependencies:
   rounded_loading_button: ^1.0.0
   cool_alert: ^1.0.1
   rxdart: ^0.23.1
+  firebase_storage: ^4.0.0
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:TMart/firebaseDatabase.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:TMart/colorFile.dart';
 import 'package:flutter/material.dart';
@@ -84,6 +85,13 @@ class _SideNavBarState extends State<SideNavBar>
           child: Row(children: [
             Expanded(
                 child: Container(
+              child: Column(
+                children:[
+
+
+                  
+                ]
+              ),
               color: charcoal,
             )),
             Align(
@@ -204,14 +212,6 @@ class _Layout1State extends State<Layout1> with ColorFile {
                     }),
               ),
             ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.fromLTRB(0, 10, 0, 5),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [],
           ),
         ),
       ],
