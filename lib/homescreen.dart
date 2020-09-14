@@ -70,8 +70,9 @@ class _HomeScreenState extends State<HomeScreen> with ColorFile {
                     child: Column(children: [
                       Expanded(flex: 5, child: BottomContainer()),
                       Expanded(
+                        flex: 1,
                         child: Container(
-                            margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                            margin: EdgeInsets.fromLTRB(10, 0, 0, 10),
                             alignment: Alignment.topCenter,
                             child: Text(
                               'Made with ❤ by Harmanjit14',
@@ -113,18 +114,25 @@ class _BottomContainerState extends State<BottomContainer>
     if (temp == null) {
       _btnController.success();
       Timer(Duration(seconds: 2), () {
-        Navigator.pushReplacementNamed(context, '/2');
+        CoolAlert.show(
+            context: context,
+            type: CoolAlertType.success,
+            title: "Congratulations",
+            text: "Please Login to continue...",
+            confirmBtnColor: burntRed);
+       setState(() {
+         i=0;
+       });
       });
     } else {
       Timer(Duration(seconds: 2), () {
         _btnController.error();
         CoolAlert.show(
-          context: context,
-          type: CoolAlertType.error,
-          title: "Oops...",
-          text: "Email or Password not correct",
-          confirmBtnColor: burntRed
-        );
+            context: context,
+            type: CoolAlertType.error,
+            title: "Oops...",
+            text: "Email or Password not correct",
+            confirmBtnColor: burntRed);
       });
       print('LOGIN FAILED');
       print(temp);
@@ -145,12 +153,11 @@ class _BottomContainerState extends State<BottomContainer>
       Timer(Duration(seconds: 2), () {
         _btnController.error();
         CoolAlert.show(
-          context: context,
-          type: CoolAlertType.error,
-          title: "Oops...",
-          text: "Email or Password not correct",
-          confirmBtnColor: burntRed
-        );
+            context: context,
+            type: CoolAlertType.error,
+            title: "Oops...",
+            text: "Email or Password not correct",
+            confirmBtnColor: burntRed);
       });
       print('REGISTRATION FAILED');
       print(temp);
@@ -164,95 +171,96 @@ class _BottomContainerState extends State<BottomContainer>
     return Container(
         width: MediaQuery.of(context).size.width * 0.8,
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Container(
-              alignment: Alignment.topLeft,
-              margin: EdgeInsets.fromLTRB(0, 0, 20, 25),
-              child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    i = 0;
-                  });
-                },
-                child: Icon(
-                  Icons.arrow_back,
-                  size: 40,
-                  color: sandyBrown,
-                ),
-              )),
-          Container(
-            height: 50,
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: ElasticInLeft(
-              child: TextField(
-                onChanged: (value) {
-                  email = value;
-                },
-                style: TextStyle(
-                  fontSize: 18,
-                ),
-                keyboardType: TextInputType.emailAddress,
-                maxLines: 1,
-                textAlign: TextAlign.center,
-                autocorrect: false,
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5)),
-                  prefixIcon: Icon(
-                    Icons.arrow_right,
+          Column(children: [
+            Container(
+                alignment: Alignment.topLeft,
+                margin: EdgeInsets.fromLTRB(0, 0, 20, 25),
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      i = 0;
+                    });
+                  },
+                  child: Icon(
+                    Icons.arrow_back,
+                    size: 40,
                     color: sandyBrown,
-                    size: 30,
                   ),
-                  suffixIcon: Icon(
-                    Icons.arrow_left,
-                    color: sandyBrown,
-                    size: 30,
+                )),
+            Container(
+              height: 50,
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: ElasticInLeft(
+                child: TextField(
+                  onChanged: (value) {
+                    email = value;
+                  },
+                  style: TextStyle(
+                    fontSize: 18,
                   ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: 15),
-          Container(
-            height: 50,
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: ElasticInRight(
-              child: TextField(
-                obscureText: true,
-                obscuringCharacter: '*',
-                onChanged: (value) {
-                  password = value;
-                },
-                style: TextStyle(
-                  fontSize: 18,
-                ),
-                keyboardType: TextInputType.text,
-                maxLines: 1,
-                textAlign: TextAlign.center,
-                autocorrect: false,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5)),
-                  prefixIcon: Icon(
-                    Icons.arrow_right,
-                    color: sandyBrown,
-                    size: 30,
-                  ),
-                  suffixIcon: Icon(
-                    Icons.arrow_left,
-                    color: sandyBrown,
-                    size: 30,
+                  keyboardType: TextInputType.emailAddress,
+                  maxLines: 1,
+                  textAlign: TextAlign.center,
+                  autocorrect: false,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                    prefixIcon: Icon(
+                      Icons.arrow_right,
+                      color: sandyBrown,
+                      size: 30,
+                    ),
+                    suffixIcon: Icon(
+                      Icons.arrow_left,
+                      color: sandyBrown,
+                      size: 30,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
+            SizedBox(height: 15),
+            Container(
+              height: 50,
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: ElasticInRight(
+                child: TextField(
+                  obscureText: true,
+                  obscuringCharacter: '*',
+                  onChanged: (value) {
+                    password = value;
+                  },
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                  keyboardType: TextInputType.text,
+                  maxLines: 1,
+                  textAlign: TextAlign.center,
+                  autocorrect: false,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                    prefixIcon: Icon(
+                      Icons.arrow_right,
+                      color: sandyBrown,
+                      size: 30,
+                    ),
+                    suffixIcon: Icon(
+                      Icons.arrow_left,
+                      color: sandyBrown,
+                      size: 30,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ]),
           Container(
             child: ZoomIn(
               child: Container(
                 height: 100,
-                margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
                 child: Container(
                   child: RoundedLoadingButton(
                       borderRadius: 5,
@@ -367,7 +375,6 @@ class _BottomContainerState extends State<BottomContainer>
             child: ZoomIn(
               child: Container(
                 height: 100,
-                margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
                 child: Container(
                   child: RoundedLoadingButton(
                       borderRadius: 5,
@@ -454,4 +461,3 @@ class _BottomContainerState extends State<BottomContainer>
     }
   }
 }
-
