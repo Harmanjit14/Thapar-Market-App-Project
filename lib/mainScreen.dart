@@ -31,11 +31,10 @@ class SideNavBar extends StatefulWidget {
 
 class _SideNavBarState extends State<SideNavBar>
     with SingleTickerProviderStateMixin<SideNavBar>, ColorFile {
-
   AnimationController animationController;
   StreamController<bool> sideBarController;
   Stream<bool> isSideBarOpenedStream;
-  final duration = Duration(milliseconds: 500);
+  final duration = Duration(milliseconds: 400);
   StreamSink<bool> isSidebarOpenedSink;
 
   void onIconPressed() {
@@ -77,8 +76,11 @@ class _SideNavBarState extends State<SideNavBar>
           duration: duration,
           top: 0,
           bottom: 0,
-          left: isSiderbarOpenAsync.data ? 0 : 0,
-          right:isSiderbarOpenAsync.data ? 0 : MediaQuery.of(context).size.width - 45,
+          left:
+              isSiderbarOpenAsync.data ? 0 : -MediaQuery.of(context).size.width,
+          right: isSiderbarOpenAsync.data
+              ? 0
+              : MediaQuery.of(context).size.width - 45,
           child: Row(children: [
             Expanded(
                 child: Container(
@@ -87,19 +89,22 @@ class _SideNavBarState extends State<SideNavBar>
             Align(
               alignment: Alignment(0, -0.8),
               child: GestureDetector(
-                onTap: (){
+                onTap: () {
                   onIconPressed();
                 },
-                child: Container(
-                  alignment: Alignment.centerLeft,
-                  height: 110,
-                  width: 35,
-                  color: charcoal,
-                  child: AnimatedIcon(
-                      icon: AnimatedIcons.menu_close,
-                      size: 25,
-                      color: orangeYellow,
-                      progress: animationController.view),
+                child: ClipPath(
+                  clipper: CustomMenuClipper(),
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    height: 110,
+                    width: 35,
+                    color: charcoal,
+                    child: AnimatedIcon(
+                        icon: AnimatedIcons.menu_close,
+                        size: 25,
+                        color: orangeYellow,
+                        progress: animationController.view),
+                  ),
                 ),
               ),
             )
@@ -107,6 +112,29 @@ class _SideNavBarState extends State<SideNavBar>
         );
       },
     );
+  }
+}
+
+class CustomMenuClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    Paint paint = Paint();
+    paint.color = Colors.white;
+    Path path = Path();
+    final width = size.width;
+    final height = size.height;
+    path.moveTo(0, 0);
+    path.quadraticBezierTo(0, 8, 10, 16);
+    path.quadraticBezierTo(width - 1, height / 2 - 20, width, height / 2);
+    path.quadraticBezierTo(width + 1, height / 2 + 20, 10, height - 16);
+    path.quadraticBezierTo(0, height-8, 0, height);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return true;
   }
 }
 
