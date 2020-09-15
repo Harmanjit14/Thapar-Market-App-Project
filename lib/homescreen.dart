@@ -258,7 +258,7 @@ class _BottomContainerState extends State<BottomContainer>
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Container(
               alignment: Alignment.topLeft,
-              margin: EdgeInsets.fromLTRB(0, 0, 20, 25),
+              margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
               child: GestureDetector(
                 onTap: () {
                   j = 1;
