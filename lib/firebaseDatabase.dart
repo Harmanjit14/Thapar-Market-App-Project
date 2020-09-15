@@ -52,4 +52,30 @@ class FirebaseDatabase {
     }
     return temp;
   }
+
+  void getUser() async {
+    FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+    final user = FirebaseFirestore.instance;
+    var obj;
+    try {
+      obj = firebaseAuth.currentUser;
+      email = obj.email;
+      print(email);
+      var x =
+          await user.collection("users").where("email", isEqualTo: email).get();
+      x.docs.forEach((element) {
+        name = element.get("name");
+        phone= element.get("phone");
+        hostel = element.get("hostel");
+      });
+      
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void logoutUser() {
+    FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+    firebaseAuth.signOut();
+  }
 }

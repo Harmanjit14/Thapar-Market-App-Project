@@ -9,7 +9,17 @@ class LandingPage extends StatefulWidget {
   _LandingPageState createState() => _LandingPageState();
 }
 
-class _LandingPageState extends State<LandingPage> {
+class _LandingPageState extends State<LandingPage> with FirebaseDatabase{
+  @override
+  void initState()  {
+    getUser();
+    super.initState();
+  }
+  @override
+  void dispose() {
+    logoutUser();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -167,7 +177,7 @@ class Layout1 extends StatefulWidget {
   _Layout1State createState() => _Layout1State();
 }
 
-class _Layout1State extends State<Layout1> with ColorFile {
+class _Layout1State extends State<Layout1> with ColorFile ,FirebaseDatabase{
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -211,6 +221,9 @@ class _Layout1State extends State<Layout1> with ColorFile {
                       );
                     }),
               ),
+              RaisedButton(onPressed: (){
+                getUser();
+              })
             ],
           ),
         ),
