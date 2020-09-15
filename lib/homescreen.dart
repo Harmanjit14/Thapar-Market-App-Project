@@ -229,7 +229,8 @@ class _BottomContainerState extends State<BottomContainer>
           Container(
             child: ZoomIn(
               child: Container(
-                height: 100,
+                margin: EdgeInsets.only(top: 15),
+               // height: 60,
                 child: Container(
                   child: RoundedLoadingButton(
                       borderRadius: 5,
