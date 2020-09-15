@@ -401,6 +401,20 @@ class _RegisterBodyState extends State<RegisterBody>
     }
   }
 
+  final emailController = new TextEditingController();
+  final passwordController = new TextEditingController();
+  final nameController = new TextEditingController();
+  final phoneController = new TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    nameController.dispose();
+    phoneController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     if (j == 1) {
@@ -412,12 +426,8 @@ class _RegisterBodyState extends State<RegisterBody>
             child: TextField(
               onChanged: (value) {
                 email = value;
-                name = null;
-                phone = null;
-                password = null;
-                hostel = "none";
               },
-              controller: null,
+              controller: emailController,
               style: TextStyle(
                 fontSize: 16,
               ),
@@ -453,11 +463,8 @@ class _RegisterBodyState extends State<RegisterBody>
               obscuringCharacter: '*',
               onChanged: (value2) {
                 password = value2;
-                name = null;
-                phone = null;
-                hostel = "none";
               },
-              controller: null,
+              controller: passwordController,
               style: TextStyle(
                 fontSize: 16,
               ),
@@ -500,6 +507,8 @@ class _RegisterBodyState extends State<RegisterBody>
               onPressed: () {
                 setState(() {
                   j = 2;
+                  emailController.clear();
+                  passwordController.clear();
                 });
               },
             ),
@@ -513,12 +522,9 @@ class _RegisterBodyState extends State<RegisterBody>
           width: MediaQuery.of(context).size.width * 0.8,
           child: ElasticInLeft(
             child: TextField(
-              controller: null,
+              controller: nameController,
               onChanged: (value3) {
                 name = value3;
-
-                phone = null;
-                hostel = "none";
               },
               style: TextStyle(
                 fontSize: 16,
@@ -551,10 +557,9 @@ class _RegisterBodyState extends State<RegisterBody>
           width: MediaQuery.of(context).size.width * 0.8,
           child: ElasticInRight(
             child: TextField(
-              controller: null,
+              controller: phoneController,
               onChanged: (value4) {
                 phone = value4;
-                hostel = "none";
               },
               style: TextStyle(
                 fontSize: 16,
@@ -597,6 +602,8 @@ class _RegisterBodyState extends State<RegisterBody>
             onPressed: () {
               setState(() {
                 j = 3;
+                nameController.clear();
+                phoneController.clear();
               });
             },
           ),
