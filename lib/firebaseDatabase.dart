@@ -3,17 +3,17 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseDatabase {
-  String name;
-  String password;
-  String email;
+  String name="";
+  String password="";
+  String email="";
   String hostel = "none";
-  String phone;
-  String tempString;
+  String phone="";
+  String tempString="";
 
   Future sendUserData() async {
     final obj = FirebaseFirestore.instance;
     try {
-      if (name == null || phone == null || email == null || password == null) {
+      if (name == "" || phone == "" || email == "" || password == "") {
         throw "error";
       } else {
         obj.collection('users').add({
@@ -60,14 +60,13 @@ class FirebaseDatabase {
     try {
       obj = firebaseAuth.currentUser;
       email = obj.email;
-      print(email);
       var x =
           await user.collection("users").where("email", isEqualTo: email).get();
       x.docs.forEach((element) {
         name = element.get("name");
         phone= element.get("phone");
         hostel = element.get("hostel");
-      });
+      });//TODO: no error taking functionality
       
     } catch (e) {
       print(e);

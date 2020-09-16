@@ -9,17 +9,13 @@ class LandingPage extends StatefulWidget {
   _LandingPageState createState() => _LandingPageState();
 }
 
-class _LandingPageState extends State<LandingPage> with FirebaseDatabase{
-  @override
-  void initState()  {
-    getUser();
-    super.initState();
-  }
+class _LandingPageState extends State<LandingPage> with FirebaseDatabase {
   @override
   void dispose() {
     logoutUser();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +37,10 @@ class SideNavBar extends StatefulWidget {
 }
 
 class _SideNavBarState extends State<SideNavBar>
-    with SingleTickerProviderStateMixin<SideNavBar>, ColorFile {
+    with
+        SingleTickerProviderStateMixin<SideNavBar>,
+        ColorFile,
+        FirebaseDatabase {
   AnimationController animationController;
   StreamController<bool> sideBarController;
   Stream<bool> isSideBarOpenedStream;
@@ -62,6 +61,10 @@ class _SideNavBarState extends State<SideNavBar>
 
   @override
   void initState() {
+    setState(() {
+      getUser();
+    });
+
     animationController = AnimationController(vsync: this, duration: duration);
     sideBarController = PublishSubject<bool>();
     isSideBarOpenedStream = sideBarController.stream;
@@ -91,17 +94,68 @@ class _SideNavBarState extends State<SideNavBar>
               isSiderbarOpenAsync.data ? 0 : -MediaQuery.of(context).size.width,
           right: isSiderbarOpenAsync.data
               ? 0
-              : MediaQuery.of(context).size.width - 45,
+              : MediaQuery.of(context).size.width - 35,
           child: Row(children: [
             Expanded(
                 child: Container(
-              child: Column(
-                children:[
-
-
-                  
-                ]
-              ),
+              child: Column(children: [
+                Container(
+                  padding: EdgeInsets.fromLTRB(20, 20, 20, 15),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: orangeYellow),
+                  margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                  child: Column(children: [
+                    Text(
+                      name,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 30,
+                          fontFamily: "maven",
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      email,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontFamily: "maven",
+                          letterSpacing: 1.5),
+                    ),
+                    SizedBox(height: 15),
+                    Container(
+                      width: 250,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            children: [
+                              FlatButton(
+                                  onPressed: () {
+                                    print('pressed');
+                                  },
+                                  child: Icon(Icons.settings)),
+                                   Text('Settings',style: TextStyle(fontSize: 14,),),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              FlatButton(
+                                  onPressed: () async {
+                                    logoutUser();
+                                    Navigator.pushReplacementNamed(context, '/');
+                                  },
+                                  child: Icon(Icons.exit_to_app,size: 28,)),
+                                  Text('Logout',style: TextStyle(fontSize: 14,),),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  ]),
+                ),
+              ]),
               color: charcoal,
             )),
             Align(
@@ -120,7 +174,7 @@ class _SideNavBarState extends State<SideNavBar>
                     child: AnimatedIcon(
                         icon: AnimatedIcons.menu_close,
                         size: 25,
-                        color: orangeYellow,
+                        color: Colors.white,
                         progress: animationController.view),
                   ),
                 ),
@@ -177,7 +231,7 @@ class Layout1 extends StatefulWidget {
   _Layout1State createState() => _Layout1State();
 }
 
-class _Layout1State extends State<Layout1> with ColorFile ,FirebaseDatabase{
+class _Layout1State extends State<Layout1> with ColorFile, FirebaseDatabase {
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -221,7 +275,7 @@ class _Layout1State extends State<Layout1> with ColorFile ,FirebaseDatabase{
                       );
                     }),
               ),
-              RaisedButton(onPressed: (){
+              RaisedButton(onPressed: () {
                 getUser();
               })
             ],
