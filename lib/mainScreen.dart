@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:TMart/firebaseDatabase.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:TMart/colorFile.dart';
 import 'package:flutter/material.dart';
@@ -357,6 +358,20 @@ class Layout1 extends StatefulWidget {
 }
 
 class _Layout1State extends State<Layout1> with ColorFile, FirebaseDatabase {
+  Widget whatsNewLayout(
+      BuildContext context, DocumentSnapshot documentSnapshot) {
+    String url = documentSnapshot.get('img');
+    return Container(
+     
+      height: 500,
+      width: MediaQuery.of(context).size.width,
+      child: Image.network(
+        url,
+        fit: BoxFit.contain,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -387,26 +402,26 @@ class _Layout1State extends State<Layout1> with ColorFile, FirebaseDatabase {
           child: Column(
             children: [
               Container(
-                height: MediaQuery.of(context).size.height * 0.2,
+                height: MediaQuery.of(context).size.height * 0.3,
                 margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 5,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child:
-                            Container(color: burntRed, child: Text('$index')),
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection("whatsNew")
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: snapshot.data.docs.length,
+                        itemBuilder: (context, index) {
+                          return whatsNewLayout(
+                              context, snapshot.data.docs[index]);
+                        },
                       );
-                    }),
-              ),
-              RaisedButton(onPressed: () {
-                fireStorage();
-              }),
-              Container(height: 100,
-              width: 100,
-                child: Image.network(
-                    "https://firebasestorage.googleapis.com/v0/b/thapar-market.appspot.com/o/WhatsNew%2F20667.jpg?alt=media&token=c51d3ed2-2cd5-4877-90dc-3765e1dfa2f6",fit: BoxFit.fill,),
+                    } else
+                      return Center(child: Text('Error in fetching Data...'));
+                  },
+                ),
               ),
             ],
           ),
