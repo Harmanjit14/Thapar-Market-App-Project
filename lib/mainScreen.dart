@@ -362,7 +362,6 @@ class _Layout1State extends State<Layout1> with ColorFile, FirebaseDatabase {
       BuildContext context, DocumentSnapshot documentSnapshot) {
     String url = documentSnapshot.get('img');
     return Container(
-     
       height: 500,
       width: MediaQuery.of(context).size.width,
       child: Image.network(
@@ -372,49 +371,145 @@ class _Layout1State extends State<Layout1> with ColorFile, FirebaseDatabase {
     );
   }
 
+  Widget topOffersLayout(
+      BuildContext context, DocumentSnapshot documentSnapshot) {
+    String from = documentSnapshot.get('from');
+    String what = documentSnapshot.get('what');
+    String code = documentSnapshot.get('code');
+    return Container(
+      decoration: BoxDecoration(
+          color: sandyBrown, borderRadius: BorderRadius.circular(12)),
+      margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            from,
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            what,
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            code,
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
+      primary: true,
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       children: [
         Container(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: TextField(
-              decoration: InputDecoration(
-                suffixIcon: Icon(
-                  Icons.arrow_left,
-                  size: 30,
-                ),
-                hintText: 'Search Here...',
-                prefixIcon: Icon(
-                  Icons.arrow_right,
-                  size: 30,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+          margin: EdgeInsets.all(20),
+          child: Row(
+            children: [
+              Container(
+                child: Text(
+                  'Whats up?',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: "maven",
+                      fontSize: 33,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
-            ),
+              Spacer(),
+              Container(
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle, color: Colors.grey[200]),
+                child: IconButton(
+                    icon: Icon(
+                      Icons.search,
+                      size: 30,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {}),
+              ),
+              SizedBox(width : 10),
+              Container(
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle, color: Colors.grey[200]),
+                child: IconButton(
+                    icon: Icon(
+                      Icons.shopping_basket,
+                      size: 30,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {}),
+              )
+            ],
           ),
         ),
         Container(
-          child: Column(
-            children: [
+          height: MediaQuery.of(context).size.height * 0.3,
+          margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+          child: StreamBuilder<QuerySnapshot>(
+            stream:
+                FirebaseFirestore.instance.collection("whatsNew").snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: snapshot.data.docs.length,
+                  itemBuilder: (context, index) {
+                    return whatsNewLayout(context, snapshot.data.docs[index]);
+                  },
+                );
+              } else
+                return Center(child: Text('Error in fetching Data...'));
+            },
+          ),
+        ),
+        SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+            height: MediaQuery.of(context).size.height * 0.4,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+                color: burntRed, borderRadius: BorderRadius.circular(10)),
+            child: Column(children: [
               Container(
-                height: MediaQuery.of(context).size.height * 0.3,
-                margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
+                margin: EdgeInsets.fromLTRB(5, 10, 5, 10),
+                child: Text('Top Offers',
+                    style: TextStyle(
+                      letterSpacing: 2,
+                        fontSize: 30,
+                        fontFamily: "maven",
+                        fontWeight: FontWeight.bold)),
+              ),
+              Expanded(
+                  child: Container(
                 child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
-                      .collection("whatsNew")
+                      .collection("offers")
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return ListView.builder(
-                        scrollDirection: Axis.horizontal,
+                        //scrollDirection: Axis.horizontal,
                         itemCount: snapshot.data.docs.length,
                         itemBuilder: (context, index) {
-                          return whatsNewLayout(
+                          return topOffersLayout(
                               context, snapshot.data.docs[index]);
                         },
                       );
@@ -422,10 +517,10 @@ class _Layout1State extends State<Layout1> with ColorFile, FirebaseDatabase {
                       return Center(child: Text('Error in fetching Data...'));
                   },
                 ),
-              ),
-            ],
+              ))
+            ]),
           ),
-        ),
+        )
       ],
     );
   }
