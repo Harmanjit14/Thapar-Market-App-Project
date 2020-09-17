@@ -136,7 +136,12 @@ class _SideNavBarState extends State<SideNavBar>
                                     print('pressed');
                                   },
                                   child: Icon(Icons.settings)),
-                                   Text('Settings',style: TextStyle(fontSize: 14,),),
+                              Text(
+                                'Settings',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
                             ],
                           ),
                           Column(
@@ -144,16 +149,136 @@ class _SideNavBarState extends State<SideNavBar>
                               FlatButton(
                                   onPressed: () async {
                                     logoutUser();
-                                    Navigator.pushReplacementNamed(context, '/');
+                                    Navigator.pushReplacementNamed(
+                                        context, '/');
                                   },
-                                  child: Icon(Icons.exit_to_app,size: 28,)),
-                                  Text('Logout',style: TextStyle(fontSize: 14,),),
+                                  child: Icon(
+                                    Icons.exit_to_app,
+                                    size: 28,
+                                  )),
+                              Text(
+                                'Logout',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
                             ],
                           ),
                         ],
                       ),
-                    )
+                    ),
                   ]),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(20),
+                          color: persianGreen,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Home',
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    color: Colors.white,
+                                    fontFamily: "maven",
+                                    letterSpacing: 2,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Icon(
+                                Icons.navigate_next,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 7,
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(20),
+                          color: persianGreen,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Wellbeing',
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    color: Colors.white,
+                                    fontFamily: "maven",
+                                    letterSpacing: 2,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Icon(
+                                Icons.navigate_next,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 7,
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(20),
+                          color: persianGreen,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Utilities',
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    color: Colors.white,
+                                    fontFamily: "maven",
+                                    letterSpacing: 2,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Icon(
+                                Icons.navigate_next,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 7,
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(20),
+                          color: persianGreen,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Fast Food',
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    color: Colors.white,
+                                    fontFamily: "maven",
+                                    letterSpacing: 2,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Icon(
+                                Icons.navigate_next,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ]),
                 ),
               ]),
               color: charcoal,
@@ -276,8 +401,13 @@ class _Layout1State extends State<Layout1> with ColorFile, FirebaseDatabase {
                     }),
               ),
               RaisedButton(onPressed: () {
-                getUser();
-              })
+                fireStorage();
+              }),
+              Container(height: 100,
+              width: 100,
+                child: Image.network(
+                    "https://firebasestorage.googleapis.com/v0/b/thapar-market.appspot.com/o/WhatsNew%2F20667.jpg?alt=media&token=c51d3ed2-2cd5-4877-90dc-3765e1dfa2f6",fit: BoxFit.fill,),
+              ),
             ],
           ),
         ),

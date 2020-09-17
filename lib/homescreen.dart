@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> with ColorFile {
                       Expanded(
                         flex: 1,
                         child: Container(
-                            margin: EdgeInsets.fromLTRB(10, 0, 0, 10),
+                            margin: EdgeInsets.fromLTRB(10, 10, 0, 10),
                             alignment: Alignment.topCenter,
                             child: Text(
                               'Made with ❤ by Harmanjit14',
