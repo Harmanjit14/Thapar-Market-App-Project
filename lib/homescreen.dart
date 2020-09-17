@@ -165,7 +165,7 @@ class _BottomContainerState extends State<BottomContainer>
                     email = value;
                   },
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                   keyboardType: TextInputType.emailAddress,
                   maxLines: 1,
@@ -201,7 +201,7 @@ class _BottomContainerState extends State<BottomContainer>
                     password = value;
                   },
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                   keyboardType: TextInputType.text,
                   maxLines: 1,
